@@ -12,8 +12,20 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+      integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+      integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+      crossorigin=""
+    ></script>
 
-    <script defer src="script.js"></script>
+    <script defer src="js/script.js"></script>
     <title>mapty // Map your workouts</title>
   </head>
   <body>
@@ -23,7 +35,7 @@
       <ul class="workouts">
         <form class="form hidden">
           <div class="form__row">
-            <label class="form__label">Type</label>
+            <label class="form__label type">Type</label>
             <select class="form__input form__input--type">
               <option value="running">Running</option>
               <option value="cycling">Cycling</option>
@@ -40,14 +52,14 @@
               placeholder="min"
             />
           </div>
-          <div class="form__row">
+          <div class="form__row cadence">
             <label class="form__label">Cadence</label>
             <input
               class="form__input form__input--cadence"
               placeholder="step/min"
             />
           </div>
-          <div class="form__row form__row--hidden">
+          <div class="form__row form__row--hidden elevation">
             <label class="form__label">Elev Gain</label>
             <input
               class="form__input form__input--elevation"
