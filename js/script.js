@@ -12,6 +12,7 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 const mapID = document.querySelector('#map');
+let workout = [];
 const loadMap = function (position) {
   const map = L.map('map').setView(
     [position.coords.latitude, position.coords.longitude],
@@ -34,15 +35,26 @@ const showForm = function (event) {
   form.classList.remove('hidden');
 };
 const clearForm = function () {
-  console.log(document.querySelector('.type').value);
   inputDistance.value = '';
   inputDuration.value = '';
   inputCadence.value = '';
   inputElevation.value = '';
 };
+const storeWorkout = () => {
+  const distance = inputDistance.value;
+  const duration = inputDuration.value;
+
+  const cadence = inputCadence.value;
+  const obj = { distance, duration, cadence };
+  workout.push(obj);
+  console.log(workout);
+  setData();
+};
+
 const hideForm = function (event) {
   if (event.key === 'Enter') {
     event.preventDefault();
+    storeWorkout();
     form.classList.add('hidden');
     clearForm();
   }
@@ -50,7 +62,7 @@ const hideForm = function (event) {
 
 form.addEventListener('keypress', hideForm);
 const toggleField = function (event) {
-  console.log(event.target.value);
+  console.log(event.target);
 
   if (event.target.value === 'running') {
     document.querySelector('.cadence').classList.remove('form__row--hidden');
@@ -69,13 +81,12 @@ if (navigator.geolocation) {
   });
 }
 
-const setData = function (key, value) {
-  localStorage.setItem(key, value);
+const setData = function () {
+  localStorage.setItem('workout', JSON.stringify(workout));
 };
 
-const getData = function (key) {
-  var value = localStorage.getItem(key);
-  console.log(value);
+const getData = function () {
+  localStorage.getItem('workout');
 };
 
 const showWorkout = () => {
